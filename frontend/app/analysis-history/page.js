@@ -8,8 +8,7 @@ import Navigation from '@/components/Navigation'
 import AnalysisHistory from '@/components/AnalysisHistory'
 import { AdvancedPagination } from '@/components/ProfessionalPagination'
 
-// API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'
+import { API_BASE_URL } from '@/lib/api'
 
 export default function AnalysisHistoryPage() {
   const { currentUser, getToken } = useAuth()

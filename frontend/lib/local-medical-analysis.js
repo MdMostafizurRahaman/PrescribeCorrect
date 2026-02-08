@@ -1,34 +1,14 @@
 // Local medical analysis using training data - NO API calls
-import fs from 'fs'
-import path from 'path'
 
 let trainingData = null
 let medicalTermsIndex = null
 
 // Load and index training data
-function loadTrainingData() {
+function loadTrainingData(data) {
   if (trainingData) return trainingData
 
   try {
-    // Try correct path first
-    const correctPath = 'D:\\PrescribeCorrect\\PrescribeCorrect\\training_data.json'
-    console.log('Looking for training data at:', correctPath)
-    
-    let rawData
-    if (fs.existsSync(correctPath)) {
-      rawData = fs.readFileSync(correctPath, 'utf8')
-      console.log('Successfully found training data at correct path')
-    } else {
-      // Try alternative paths
-      const altPath = path.join(process.cwd(), '..', 'training_data.json')
-      console.log('Trying alternative path:', altPath)
-      if (fs.existsSync(altPath)) {
-        rawData = fs.readFileSync(altPath, 'utf8')
-      } else {
-        throw new Error('Training data file not found in any expected location')
-      }
-    }
-    trainingData = JSON.parse(rawData)
+    trainingData = data
     
     // Create index for fast lookup
     medicalTermsIndex = {
@@ -73,8 +53,8 @@ function loadTrainingData() {
 }
 
 // Enhanced OCR correction using training data
-function correctOCRText(rawText) {
-  loadTrainingData()
+function correctOCRText(rawText, trainingData) {
+  loadTrainingData(trainingData)
   
   let correctedText = rawText
   
@@ -550,8 +530,9 @@ function extractTests(text) {
 }
 
 // Generate medical analysis using local training data
-function generateMedicalAnalysis(ocrText) {
-  const correctedText = correctOCRText(ocrText)
+function generateMedicalAnalysis(ocrText, trainingData) {
+  loadTrainingData(trainingData)
+  const correctedText = correctOCRText(ocrText, trainingData)
   const medicalInfo = extractMedicalInfo(correctedText)
   
   const analysis = {

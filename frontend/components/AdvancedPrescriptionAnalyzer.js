@@ -7,8 +7,7 @@ import { useRouter } from 'next/navigation'
 import BengaliSummaryCard from './BengaliSummaryCard'
 import DetailedAnalysisReportGenerator from './DetailedAnalysisReportGenerator'
 
-// API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'
+import { API_BASE_URL } from '@/lib/api'
 
 const AdvancedPrescriptionAnalyzer = () => {
   const { currentUser, getToken } = useAuth()

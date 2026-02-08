@@ -1,5 +1,24 @@
 import { NextResponse } from 'next/server'
 import { generateMedicalAnalysis, correctOCRText } from '@/lib/local-medical-analysis'
+import fs from 'fs'
+import path from 'path'
+
+let cachedTrainingData = null
+
+function loadTrainingData() {
+  if (cachedTrainingData) return cachedTrainingData
+  
+  try {
+    const trainingDataPath = path.join(process.cwd(), 'public', 'training_data.json')
+    const trainingDataRaw = fs.readFileSync(trainingDataPath, 'utf8')
+    cachedTrainingData = JSON.parse(trainingDataRaw)
+    console.log('Training data loaded successfully')
+    return cachedTrainingData
+  } catch (error) {
+    console.error('Error loading training data:', error)
+    throw error
+  }
+}
 
 export async function POST(request) {
   try {
@@ -11,10 +30,13 @@ export async function POST(request) {
 
     console.log('Analyzing prescription using local training data...')
     console.log('Original OCR text:', text.substring(0, 200) + '...')
-    
+
+    // Load training data (cached)
+    const trainingData = loadTrainingData()
+
     // Use local training data analysis - NO API calls
-    const analysis = generateMedicalAnalysis(text)
-    const correctedText = correctOCRText(text)
+    const analysis = generateMedicalAnalysis(text, trainingData)
+    const correctedText = correctOCRText(text, trainingData)
     
     console.log('Corrected text:', correctedText.substring(0, 200) + '...')
     console.log('Analysis generated successfully using training data')

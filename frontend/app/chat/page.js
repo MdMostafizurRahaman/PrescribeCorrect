@@ -6,8 +6,7 @@ import { useAuth } from '@/lib/auth-context'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-// API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'
+import { API_BASE_URL } from '@/lib/api'
 
 // Lazy load Navigation component
 const Navigation = dynamic(() => import('@/components/Navigation'), {

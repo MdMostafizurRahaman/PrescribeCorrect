@@ -9,8 +9,7 @@ import MedicalReportDisplay from '@/components/MedicalReportDisplay'
 import { Upload, File, Loader2, Eye, Trash2, Download, Share2, FileText, Image as ImageIcon, AlertCircle } from 'lucide-react'
 import pdfToText from 'react-pdftotext'
 
-// API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'
+import { API_BASE_URL } from '@/lib/api'
 
 export default function EnhancedUploadPage() {
   const [selectedFile, setSelectedFile] = useState(null)
