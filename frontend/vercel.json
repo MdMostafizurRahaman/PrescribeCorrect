@@ -5,7 +5,7 @@
   "regions": ["sin1"],
   "functions": {
     "app/api/**/*.js": {
-      "maxDuration": 300
+      "maxDuration": 30
     }
   },
   "rewrites": [
@@ -32,5 +32,10 @@
         }
       ]
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max-old-space-size=4096"
+    }
+  }
 }
