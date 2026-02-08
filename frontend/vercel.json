@@ -5,7 +5,7 @@
   "regions": ["sin1"],
   "functions": {
     "app/api/**/*.js": {
-      "maxDuration": 500
+      "maxDuration": 300
     }
   },
   "rewrites": [
