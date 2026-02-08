@@ -71,9 +71,6 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
             "http://localhost:3000", 
-            "https://PrescribeCorrect-frontend.onrender.com", 
-            "https://medi-lens-amwt.vercel.app",
-            "https://PrescribeCorrect-x6zm.onrender.com",
             "https://prescribe-correct.vercel.app"
         )); // frontend origins
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
