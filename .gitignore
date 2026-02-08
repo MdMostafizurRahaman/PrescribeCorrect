@@ -9,3 +9,8 @@ Notebook/Customized_Chatbot/*.csv
 Notebook/Customized_Chatbot/*.json
 .ipynb_checkpoints/
 Checkpoints/
+prescriptions/
+disease_dataset.csv
+medicine_dataset.csv
+tests_list.json
+.vscode/
